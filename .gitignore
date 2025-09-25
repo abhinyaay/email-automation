@@ -1,0 +1,24 @@
+# Sensitive Files
+config.json
+config_test.json
+*.pdf
+sent_emails.json
+hr_contacts.csv
+
+# Logs
+*.log
+*.log.*
+
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Deployment
+*.tar.gz
+*.pem

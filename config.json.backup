@@ -1,0 +1,18 @@
+{
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "email": "your_email@gmail.com",
+    "password": "your_app_password",
+    "candidate_name": "Abhinay Kumar",
+    "phone_number": "+91-XXXXXXXXXX",
+    "daily_limit": 500,
+    "min_delay": 30,
+    "max_delay": 120,
+    "business_hours_start": 9,
+    "business_hours_end": 18,
+    "resume_path": "Abhinay-Kumar.pdf",
+    "hr_contacts_file": "hr_contacts.csv",
+    "email_template_file": "email_template.html",
+    "sent_emails_log": "sent_emails.json",
+    "country_code": "IN"
+}
