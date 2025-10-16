@@ -115,14 +115,15 @@ class EmailAutomation24x7:
     def connect_smtp(self) -> bool:
         """Establish SMTP connection with retry logic"""
         try:
+            # Always create fresh connection to avoid timeout issues
             if self.smtp_server:
                 try:
-                    self.smtp_server.noop()
-                    return True
+                    self.smtp_server.quit()
                 except:
-                    self.smtp_server = None
+                    pass
+                self.smtp_server = None
             
-            self.logger.info("Establishing SMTP connection...")
+            self.logger.info("Establishing fresh SMTP connection...")
             context = ssl.create_default_context()
             self.smtp_server = smtplib.SMTP(self.config['smtp_server'], self.config['smtp_port'])
             self.smtp_server.starttls(context=context)
@@ -137,7 +138,7 @@ class EmailAutomation24x7:
             self.logger.error(f"SMTP connection failed (attempt {self.connection_attempts}): {e}")
             
             if self.connection_attempts < self.max_connection_attempts:
-                wait_time = 2 ** self.connection_attempts * 60
+                wait_time = min(300, 2 ** self.connection_attempts * 60)  # Cap at 5 minutes
                 self.logger.info(f"Retrying connection in {wait_time} seconds...")
                 time.sleep(wait_time)
                 return self.connect_smtp()
@@ -171,6 +172,11 @@ class EmailAutomation24x7:
             # Add some randomization (±25%) to avoid patterns
             min_delay = max(30, optimal_delay * 0.75)  # Minimum 30 seconds
             max_delay = min(300, optimal_delay * 1.25)  # Maximum 5 minutes
+            
+            # Ensure min_delay is not greater than max_delay
+            if min_delay >= max_delay:
+                min_delay = 30
+                max_delay = 120
             
             delay = random.randint(int(min_delay), int(max_delay))
             
