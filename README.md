@@ -11,7 +11,9 @@ An intelligent Python-based system for sending personalized cold emails to HR co
 - 🛡️ **Anti-Spam Protection**: Intelligent delays and connection management
 - ☁️ **AWS Deployment Ready**: Complete EC2 setup scripts
 - 📊 **Progress Tracking**: Comprehensive logging and monitoring
-- - Modular design for easy customization and scaling
+- Modular design for easy customization and scaling
+- Supports long-running execution with graceful logging
+
 
 ## Quick Setup
 
